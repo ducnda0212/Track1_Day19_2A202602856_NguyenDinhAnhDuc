@@ -27,8 +27,16 @@ Chi tiết ở [three-option-design-sheet.md](three-option-design-sheet.md).
 ## 5. Prototype Feedback
 - Feedback Note của phiên tôi facilitate: [prototype-feedback-note.md](prototype-feedback-note.md)
 - Tổng hợp ba feedback: [group-feedback-synthesis.md](group-feedback-synthesis.md)
-- **Next Change:** Kiểm tra và sửa khả năng fullscreen, giao diện của **Option C**, rồi cho một tester khác thử lại cùng nhiệm vụ mà không hướng dẫn. Đề xuất dựa trên câu nói trực tiếp của tester về giao diện
-- **Still Unproven:** Chưa biết lỗi chọn chữ ở B có tái hiện trên trình duyệt hoặc đoạn slide khác không; tester C có tự tìm được công cụ chọn chữ nếu không được gợi ý không; tester có thực sự kiểm tra kỹ nội dung AI làm khi ôn bài thật không; và C có giúp học tốt hơn A/B hay không
+- **Next Change:** Giữ Option C để sửa một luồng ưu tiên: **tạo và duyệt bản ôn tập có đối chiếu nguồn**, rồi test lại.
+- **Still Unproven:** 
+    - C tốt hơn A/B nhờ cơ chế tổng hợp AI, hay được chọn chủ yếu vì Coach và nhiều tính năng.
+    - Học viên tự đi hết luồng tạo nháp → kiểm tra nguồn → sửa → duyệt, nhất là khi không có hướng dẫn.
+    - Học viên đọc kỹ, phát hiện và sửa lỗi nội dung AI trước khi lưu; phát biểu “sẽ kiểm tra” chưa đủ chứng minh hành vi này.
+    - AI thật tạo nội dung chính xác; phần tổng hợp được ghi nhận ở lượt deploy F1 đang dùng mock.
+    - Sản phẩm giúp giảm thời gian tìm note, tăng chất lượng ôn tập hoặc ghi nhớ sau vài ngày.
+    - Các lỗi chọn chữ B và fullscreen C phổ biến đến mức nào trên các môi trường khác nhau.
+    - Coach hoạt động giữa các thiết bị/tài khoản; chuyển vai cùng trình duyệt chưa chứng minh trao đổi thực tế.
+    - Cả ba tester ngoài nhóm và kết quả không bị ảnh hưởng bởi thứ tự A → B → C, thời lượng hoặc hỗ trợ của người điều phối.
 
 ## 6. AI Support Log
 [ai-support-log.md](ai-support-log.md)
