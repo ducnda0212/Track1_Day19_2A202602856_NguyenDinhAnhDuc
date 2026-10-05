@@ -27,8 +27,8 @@ Chi tiết ở [three-option-design-sheet.md](three-option-design-sheet.md).
 ## 5. Prototype Feedback
 - Feedback Note của phiên tôi facilitate: [prototype-feedback-note.md](prototype-feedback-note.md)
 - Tổng hợp ba feedback: [group-feedback-synthesis.md](group-feedback-synthesis.md)
-- **Next Change:** [điền sau khi tổng hợp]
-- **Still Unproven:** [điền sau khi tổng hợp]
+- **Next Change:** Kiểm tra và sửa khả năng fullscreen, giao diện của **Option C**, rồi cho một tester khác thử lại cùng nhiệm vụ mà không hướng dẫn. Đề xuất dựa trên câu nói trực tiếp của tester về giao diện
+- **Still Unproven:** Chưa biết lỗi chọn chữ ở B có tái hiện trên trình duyệt hoặc đoạn slide khác không; tester C có tự tìm được công cụ chọn chữ nếu không được gợi ý không; tester có thực sự kiểm tra kỹ nội dung AI làm khi ôn bài thật không; và C có giúp học tốt hơn A/B hay không
 
 ## 6. AI Support Log
 [ai-support-log.md](ai-support-log.md)
