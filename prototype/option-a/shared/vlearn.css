@@ -1,0 +1,118 @@
+/* VLearn shell — dùng chung cho Option A, B, C (common context + components) */
+:root {
+  --bg: #161618;
+  --panel: #1d1d20;
+  --panel-2: #25252a;
+  --panel-3: #2d2d33;
+  --border: #33333a;
+  --text: #ececef;
+  --muted: #9b9ba5;
+  --dim: #6f6f78;
+  --primary: #2f62a8;
+  --primary-hi: #3a73c2;
+  --active: #d24a3c;
+  --mark: #fde68a;
+  --hand: #1d4ed8;
+  --hand-red: #c2410c;
+  --l-main: #34b07a;
+  --l-unclear: #e3a23b;
+  --l-question: #8b96f2;
+  --radius: 10px;
+  --font: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --hand-font: "Caveat", "Comic Sans MS", cursive;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg); color: var(--text); font: 14px/1.5 var(--font); }
+button { font: inherit; color: inherit; cursor: pointer; }
+textarea, select { font: inherit; }
+
+/* ---------- App frame ---------- */
+.vl-app { display: grid; grid-template-columns: 290px 1fr; grid-template-rows: 52px 1fr; height: 100vh; }
+.vl-top { grid-column: 1 / -1; display: flex; align-items: center; gap: 14px; padding: 0 18px; background: var(--panel); border-bottom: 1px solid var(--border); }
+.vl-top-title { font-weight: 600; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vl-top-right { margin-left: auto; display: flex; align-items: center; gap: 22px; color: var(--text); font-size: 13px; white-space: nowrap; }
+.vl-progress { display: flex; align-items: center; gap: 10px; color: var(--muted); }
+.vl-progress-bar { width: 110px; height: 5px; border-radius: 3px; background: var(--panel-3); display: inline-block; }
+.vl-top-link { opacity: .9; }
+.vl-avatar { width: 30px; height: 30px; border-radius: 50%; background: #2c3e5c; display: grid; place-items: center; font-weight: 600; }
+.vl-icon-btn { background: none; border: 0; padding: 6px; border-radius: 6px; font-size: 16px; line-height: 1; }
+.vl-icon-btn:hover { background: var(--panel-3); }
+
+/* ---------- Sidebar ---------- */
+.vl-side { background: var(--panel); border-right: 1px solid var(--border); overflow-y: auto; display: flex; flex-direction: column; }
+.vl-side-mod { display: flex; justify-content: space-between; padding: 16px 16px 10px; font-weight: 700; font-size: 12.5px; letter-spacing: .06em; }
+.vl-side-sub { padding: 8px 16px 12px; font-weight: 700; font-size: 13.5px; letter-spacing: .03em; border-bottom: 1px solid var(--border); }
+.vl-side-group { padding: 14px 8px 6px; border-bottom: 1px solid var(--border); }
+.vl-side-group h4 { margin: 0 8px 6px; font-size: 13px; font-weight: 600; }
+.vl-side-item { display: flex; align-items: center; gap: 10px; padding: 7px 8px; border-radius: 6px; font-size: 13px; color: #dcdce0; }
+.vl-side-item svg { flex: none; color: var(--muted); }
+.vl-side-item span.t { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vl-side-item span.m { color: var(--muted); font-size: 12px; }
+.vl-side-item.is-current { background: var(--panel-3); box-shadow: inset 3px 0 0 var(--active); font-weight: 600; }
+.vl-side-item.is-current span.m { color: var(--text); }
+.vl-side-foot { margin-top: auto; padding: 12px 16px; border-top: 1px solid var(--border); }
+.vl-reset { background: none; border: 1px dashed var(--border); color: var(--muted); padding: 6px 10px; border-radius: 6px; font-size: 12px; width: 100%; }
+.vl-reset:hover { color: var(--text); border-color: var(--muted); }
+
+/* ---------- Main ---------- */
+.vl-main { overflow-y: auto; position: relative; }
+.vl-lesson { max-width: 1010px; margin: 0 auto; padding: 8px 28px 32px; }
+
+/* Slide (ảnh) + lớp phủ cho highlight / ghi chú */
+.vl-slide { position: relative; background: #fff; border-radius: 6px; overflow: hidden; aspect-ratio: 16 / 9; container-type: inline-size; }
+.vl-slide > img { display: block; width: 100%; height: 100%; object-fit: contain; user-select: none; -webkit-user-drag: none; pointer-events: none; }
+.vl-text { position: absolute; inset: 0; overflow: hidden; pointer-events: none; user-select: none; }
+.vl-text span { position: absolute; white-space: pre; color: transparent; transform-origin: 0 0; }
+.vl-text span::selection { background: rgba(250, 204, 21, .5); color: transparent; }
+.vl-stage.tool-pointer .vl-text { pointer-events: auto; user-select: text; cursor: text; }
+.vl-stage.tool-pointer .vl-over { pointer-events: none; }
+.vl-stage.tool-pointer .vl-mark, .vl-stage.tool-pointer .vl-hand, .vl-stage.tool-pointer .vl-textnote { pointer-events: auto; }
+.vl-over { position: absolute; inset: 0; user-select: none; touch-action: none; }
+.vl-mark { position: absolute; background: rgba(250, 204, 21, .55); mix-blend-mode: multiply; border-radius: 3px; box-shadow: inset 0 0 0 1.5px rgba(202, 138, 4, .85); cursor: pointer; }
+.vl-mark.is-focus { box-shadow: 0 0 0 3px var(--primary-hi), inset 0 0 0 1.5px rgba(202, 138, 4, .85); mix-blend-mode: normal; background: rgba(250, 204, 21, .35); }
+.vl-hand, .vl-textnote { position: absolute; font-family: var(--hand-font); line-height: 1.1; padding: 0 .3em; border-radius: 4px; background: rgba(255, 255, 255, .82); white-space: pre-wrap; word-break: break-word; cursor: pointer; font-size: 2.5cqw; }
+.vl-hand { color: var(--hand); }
+.vl-textnote { color: var(--hand-red); font-size: 2.7cqw; }
+.vl-textnote.is-focus, .vl-hand.is-focus { outline: 3px solid var(--primary-hi); outline-offset: 2px; }
+.vl-drag { position: absolute; background: rgba(250, 204, 21, .35); border: 2px dashed rgba(202, 138, 4, .95); border-radius: 3px; pointer-events: none; }
+
+/* Toolbar */
+.vl-toolbar { display: flex; align-items: center; gap: 16px; margin-top: 10px; padding: 6px 4px; font-size: 13px; }
+.vl-tools { display: flex; gap: 2px; }
+.vl-tools span { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 6px; color: #d5d5da; }
+.vl-tools span.on { outline: 1px solid var(--primary-hi); }
+.vl-seg { display: flex; gap: 14px; color: #d5d5da; }
+.vl-pager { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+.vl-pager button { background: none; border: 0; font-size: 18px; padding: 2px 8px; border-radius: 6px; }
+.vl-pager button:hover:not(:disabled) { background: var(--panel-3); }
+.vl-pager button:disabled { opacity: .3; cursor: default; }
+.vl-pager b { background: var(--panel-2); padding: 2px 10px; border-radius: 4px; font-weight: 600; }
+.vl-tb-btn { background: none; border: 0; padding: 6px 10px; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; }
+.vl-tb-btn:hover { background: var(--panel-3); }
+.vl-review-btn { background: var(--primary); font-weight: 600; }
+.vl-review-btn:hover { background: var(--primary-hi); }
+
+.vl-teacher { margin-top: 10px; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; }
+.vl-teacher-h { font-weight: 600; margin-bottom: 4px; }
+.vl-teacher div:last-child { color: #c9c9cf; }
+.vl-react { display: flex; gap: 18px; padding: 16px 6px; color: #c9c9cf; font-size: 15px; }
+.vl-footnav { display: flex; justify-content: space-between; }
+
+/* Buttons */
+.vl-btn-primary, .vl-btn-ghost { border-radius: 8px; padding: 9px 16px; font-weight: 600; border: 1px solid transparent; }
+.vl-btn-primary { background: var(--primary); border-color: var(--primary); }
+.vl-btn-primary:hover { background: var(--primary-hi); }
+.vl-btn-ghost { background: transparent; border-color: var(--border); }
+.vl-btn-ghost:hover { background: var(--panel-2); }
+.vl-btn-sm { padding: 5px 10px; font-size: 12.5px; font-weight: 500; }
+
+/* Modal (xem slide gốc) */
+.vl-modal { position: fixed; inset: 0; background: rgba(0,0,0,.65); display: grid; place-items: center; z-index: 50; padding: 24px; }
+.vl-modal-box { width: min(900px, 100%); background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px 16px; }
+.vl-modal-h { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-weight: 600; }
+
+/* Toast + undo */
+.vl-toast { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%); background: #f4f4f5; color: #18181b; padding: 10px 14px 10px 16px; border-radius: 8px; display: flex; gap: 16px; align-items: center; box-shadow: 0 8px 24px rgba(0,0,0,.4); z-index: 60; font-weight: 500; }
+.vl-toast button { background: none; border: 0; color: var(--primary); font-weight: 700; padding: 2px 6px; }
